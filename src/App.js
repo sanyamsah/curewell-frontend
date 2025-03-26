@@ -4,6 +4,8 @@ import SpecializationPage from './pages/SpecializationPage';
 import SurgeryPage from './pages/SurgeryPage';
 import DoctorPage from './pages/DoctorPage';
 import HomePage from './pages/HomePage';
+import LoginPage from './pages/LoginPage';
+import RegistrationPage from './pages/RegistrationPage'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
@@ -16,6 +18,8 @@ function App() {
         <Route path='/specializations' element={<SpecializationPage />} />
         <Route path='/surgery' element={<SurgeryPage />} />
         <Route path='/add/doctor' element={<AddDoctorPage />} />
+        <Route path='/login' element={<LoginPage />} />
+        <Route path='/register' element={<RegistrationPage />} />
       </Routes>
     </BrowserRouter>
   );

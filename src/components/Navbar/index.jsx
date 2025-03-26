@@ -1,6 +1,24 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 
 const Navbar = () => {
+    const navigate = useNavigate();
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    useEffect(() => {
+        let token = localStorage.getItem("token");
+        if (!token) {
+            setIsLoggedIn(false);
+        } else {
+            setIsLoggedIn(true);
+        }
+    }, [isLoggedIn]);
+
+    const onLogoutHandler = () => {
+        localStorage.clear();
+        setIsLoggedIn(false);
+        navigate("/");
+    };
     return (
         <nav className="navbar navbar-expand-lg navbar-light" style={{ backgroundColor: "#155724" }}> 
             <div className="container-fluid">
@@ -28,6 +46,18 @@ const Navbar = () => {
                             <Link className="nav-link text-white px-3 py-1 bg-success rounded-pill mx-2" to="/add/doctor">Add Doctor</Link>
                         </li>
                     </ul>
+                    <div className="form-inline my-2 my-lg-0">
+                    {!isLoggedIn ? (
+                        <Link className="btn btn-primary" to={"/login"}>
+                            Login
+                        </Link>
+                    ) : (
+                        <button className="btn btn-danger" onClick={onLogoutHandler}>
+                            Logout
+                        </button>
+                    )}
+
+                </div>
                 </div>
             </div>
         </nav>

@@ -4,10 +4,15 @@ import Doctors from '../Doctors';
 
 const DoctorList = () => {
     const [doctors, setDoctors] = useState([]);
-    
+
     const getDoctorList = async () => {
         try {
-            const response = await axios.get('http://localhost:9002/api/doctors');
+            const response = await axios.get("http://localhost:9002/api/doctors", {
+                withCredentials: true,
+                headers: {
+                    "Authorization": `Bearer ${localStorage.getItem("token")}`
+                }
+            });
             setDoctors(response.data);
         } catch (error) {
             console.error("Error fetching doctor data:", error);
